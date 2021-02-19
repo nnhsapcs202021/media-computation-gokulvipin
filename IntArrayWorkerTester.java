@@ -78,7 +78,7 @@ public class IntArrayWorkerTester
     }
 
     /** Method to test getColTotal */
-    /*
+    
     public static void testGetColTotal()
     {
         IntArrayWorker worker = new IntArrayWorker();
@@ -91,7 +91,7 @@ public class IntArrayWorkerTester
         total = worker.getColTotal(2);
         System.out.println("Total for column 2 should be 9 and is " + total);
         }
-*/
+
         public static void main(String[] args)
         {
         testSetMatrix();

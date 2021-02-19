@@ -102,7 +102,7 @@ public class IntArrayWorker
         int count = 0;
         for (int row = 0; row < matrix.length; row++)
         {
-            for (int col = 0; col < matrix[0].length; 
+            for (int col = 0; col < matrix[row].length; 
             col++)
             {
                 if(num == matrix[row][col]){
@@ -128,21 +128,19 @@ public class IntArrayWorker
         }
         return largestNum;
     }
-    /*
-    public int getColTotal(int row){
-        int numCol = 0;
-        
-            for (int col = 0; col < matrix[0].length; 
-            col++)
-            {
-                if (col == 2){
-                    numCol += matrix[row][col];
-                }
+    
+    public int getColTotal(int column){
+        int count = 0;
+        for(int i = 0; i <this.matrix.length; i++){
+            count += this.matrix[i][column];
+        }
+           return count;
+            
+               
             }
         
         
-        return numCol;
+     
         
     }
-    */
-}
+    
