@@ -84,7 +84,43 @@ public class Picture extends SimplePicture
     return output;
     
   }
-  
+   /**
+     * Mirrors the seagull to the right so that there are two seagulls on the beach near each other.
+     */
+    public void mirrorGull() {
+        int mirrorPoint = 350;
+        Pixel leftPixel = null;
+        Pixel rightPixel = null;
+
+        Pixel[][] pixels = this.getPixels2D();
+
+        for (int row = 230; row < 330; row++) {
+            for (int col = 230; col < mirrorPoint; col++) {
+
+                leftPixel = pixels[row][col];
+                rightPixel = pixels[row]
+                        [mirrorPoint - col + mirrorPoint];
+                rightPixel.setColor(leftPixel.getColor());
+            }
+        }
+    }
+
+    /**
+     * Method that mirrors the picture around a horizontal mirror in the center of the picture from top to bottom
+     */
+    public void mirrorHorizontal() {
+        Pixel[][] pixels = this.getPixels2D();
+        Pixel topPixel = null;
+        Pixel bottomPixel = null;
+        int height = pixels.length;
+        for (int col = 0; col < pixels[0].length; col++) {
+            for (int row = 0; row < height / 2; row++) {
+                topPixel = pixels[row][col];
+                bottomPixel = pixels[height - 1 - row][col];
+                bottomPixel.setColor(topPixel.getColor());
+            }
+        }
+    }
   /** Method to set the blue to 0 */
   public void zeroBlue()
   {
@@ -236,16 +272,7 @@ public class Picture extends SimplePicture
   }
   
   
-  /* Main method for testing - each class in Java can have a main 
-   * method 
-   */
-  public static void main(String[] args) 
-  {
-    Picture beach = new Picture("beach.jpg");
-    beach.explore();
-    beach.zeroBlue();
-    beach.explore();
-  }
+ 
 
   public void mirrorVerticalRightToLeft()
   {
@@ -280,21 +307,41 @@ public class Picture extends SimplePicture
       }
     }
   }
-  public void mirrorHorizontalBottomToTop()
-  {
-    Pixel[][] pixels = this.getPixels2D();
-    Pixel topPixel = null;
-    Pixel bottomPixel = null;
-    int length = pixels.length;
-    for (int row = 0; row < length/2; row++)
-    {
-      for (int col = 0; col < pixels[0].length; col++)
-      {
-        topPixel = pixels[row][col];
-        bottomPixel = pixels[length-row-1][col];
-        topPixel.setColor(bottomPixel.getColor());
-      }
+   public void mirrorHorizontalBotToTop() {
+        Pixel[][] pixels = this.getPixels2D();
+        Pixel topPixel = null;
+        Pixel bottomPixel = null;
+        int height = pixels.length;
+        for (int col = 0; col < pixels[0].length; col++) {
+            for (int row = height - 1; row > height / 2; row--) {
+                bottomPixel = pixels[row][col];
+                topPixel = pixels[(height - row) - 1][col];
+                topPixel.setColor(bottomPixel.getColor());
+            }
+        }
     }
+  public void cropAndCopy( Picture sourcePicture, int startSourceRow, int endSourceRow, int startSourceCol, int endSourceCol,
+         int startDestRow, int startDestCol ){
+             Pixel[][] sourcePixel = sourcePicture.getPixels2D();
+             Pixel[][] destPixel = this.getPixels2D();
+             
+             int rowRange = startDestRow - startSourceRow;
+             int colRange = startDestCol - startSourceCol;
+             
+             for (int row= startSourceRow; row<endSourceRow; row++){
+                 for (int col= startSourceCol; col<endSourceCol; col++){
+                     destPixel[row+rowRange][col+colRange].setColor(sourcePixel[row][col].getColor());
+                    }
+                }
+            }
+   /* Main method for testing - each class in Java can have a main 
+   * method 
+   */
+  public static void main(String[] args) 
+  {
+    Picture beach = new Picture("beach.jpg");
+    beach.explore();
+    beach.zeroBlue();
+    beach.explore();
   }
-  
 } // this } is the end of class Picture, put all new methods before this

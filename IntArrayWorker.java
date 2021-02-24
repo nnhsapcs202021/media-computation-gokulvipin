@@ -10,7 +10,7 @@ public class IntArrayWorker
     {
         matrix = theMatrix;
     }
-
+// small
     /**
      * Method to return the total 
      * @return the total of the values in the array
