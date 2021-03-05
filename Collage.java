@@ -13,23 +13,24 @@ import java.util.List;
  */
 public class Collage
 {
-    public static void main (){
+    public static void main (String[] args){
+        Picture collage = new Picture(1000,6000);
+        Picture messi1 = new Picture("messi.jpg");
+        Picture messi2 = new Picture("messi.jpg");
+        Picture messi3 = new Picture("messi.jpg");
+        Picture messi4 = new Picture("messi.jpg");
+
+        messi2.mirrorVerticalRightToLeft();
+        messi3.greyscale();
+        messi4.keepOnlyBlue();
+        // source image
+        collage.cropAndCopy(messi1,0,300,0,900,0,0);
+        collage.cropAndCopy(messi2,0,300,0,900,0,901);
+        collage.cropAndCopy(messi3,0,300,0,900,301,0);
+        collage.cropAndCopy(messi4,0,300,0,900,301,901);
         
+        collage.explore();
+        collage.write("C:\\Users\\gokxl\\Media computation project-copy\\images\\CollageImage.jpg");
     }
-     /*
-    public void cropAndCopy( Picture sourcePicture, int startSourceRow, int endSourceRow, int startSourceCol, int endSourceCol,
-         int startDestRow, int startDestCol ){
-             Pixel[][] sourcePixel = sourcePicture.getPixels2D();
-             Pixel[][] destPixel = this.getPixels2D();
-             
-             int rowRange = startDestRow - startSourceRow;
-             int colRange = startDestCol - startSourceCol;
-             
-             for (int row= startSourceRow; row<endSourceRow; row++){
-                 for (int col= startSourceCol; col<endSourceCol; col++){
-                     destPixel[row+rowRange][col+colRange].setColor(sourcePixel[row][col].getColor());
-                    }
-                }
-            }
-            */
+
 }
